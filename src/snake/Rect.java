@@ -1,48 +1,33 @@
 package snake;
 
-import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 
-public class Rect {
+public class Rect extends Drawable {
 
-	private int width;
-	private int height;
-	private Point point;
-	private Color color;
+	private Point location;
+	private Dimension dimension;
 
-	public Rect(int x, int y, int width, int height, Color color) {
-		point = new Point(x, y);
-		this.height = height;
-		this.width = width;
-		this.color = color;
+	public Rect(int x, int y, int width, int height) {
+		this(new Point(x, y), new Dimension(width, height));
 	}
-	
+
+	public Rect(Point location, Dimension dimension) {
+		this.location = location;
+		this.dimension = dimension;
+	}
+
+	@Override
 	public void draw(Graphics g) {
-		g.setColor(color);
-		g.fillRect(point.getX(), point.getY(), this.width, this.height);
+		g.fillRect((int) location.getX(), (int) location.getY(), (int) dimension.getWidth(), (int) dimension.getHeight());
 	}
 
-	public Point getPoint() {
-		return point;
+	public Point getLocation() {
+		return location;
 	}
 
-	public void setPoint(Point point) {
-		this.point = point;
-	}
-
-	public int getWidth() {
-		return width;
-	}
-	
-	public int getHeight() {
-		return height;
-	}
-	
-	public int getX() {
-		return point.getX();
-	}
-	
-	public int getY() {
-		return point.getY();
+	public Dimension getDimension() {
+		return dimension;
 	}
 }

@@ -1,20 +1,21 @@
 package snake;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
 public class GameWindow extends JFrame {
-	
-	private Rect background;
-	private Rect rect;
-	
+
+	private Renderer renderer;
+
+	public Renderer getRenderer() {
+		return renderer;
+	}
+
 	public GameWindow() {
-		background = new Rect(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT, Constants.BACKGROUND_COLOR);
-		rect = new Rect(60, 70, 200, 80, Color.GREEN);
-		
+		renderer = new Renderer();
+
 		setTitle(Constants.GAME_TILE);
 		setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
 		setLocationRelativeTo(null);
@@ -22,10 +23,10 @@ public class GameWindow extends JFrame {
 		setResizable(false);
 		setVisible(true);
 	}
-	
+
 	@Override
 	public void paint(Graphics g) {
-		background.draw(g);
-		rect.draw(g);
+		renderer.render(g);
 	}
+
 }
