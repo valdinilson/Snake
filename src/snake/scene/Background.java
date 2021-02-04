@@ -1,4 +1,7 @@
-package snake;
+package snake.scene;
+
+import snake.graphics.Rect;
+import snake.util.Constants;
 
 public class Background extends Rect {
 

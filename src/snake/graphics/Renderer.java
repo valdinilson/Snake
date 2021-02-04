@@ -1,4 +1,4 @@
-package snake;
+package snake.graphics;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
