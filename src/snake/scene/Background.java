@@ -1,12 +1,15 @@
 package snake.scene;
 
+import static snake.util.Constants.BACKGROUND_COLOR;
+import static snake.util.Constants.WINDOW_HEIGHT;
+import static snake.util.Constants.WINDOW_WIDTH;
+
 import snake.graphics.Rect;
-import snake.util.Constants;
 
 public class Background extends Rect {
 
 	public Background() {
-		super(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
-		setColor(Constants.BACKGROUND_COLOR);
+		super(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+		setColor(BACKGROUND_COLOR);
 	}
 }

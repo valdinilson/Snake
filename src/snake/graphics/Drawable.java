@@ -1,5 +1,7 @@
 package snake.graphics;
 
+import static java.awt.Color.BLACK;
+
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -8,7 +10,7 @@ public abstract class Drawable {
 	private Color color;
 
 	public Drawable() {
-		this(Color.BLACK);
+		this(BLACK);
 	}
 
 	public Drawable(Color color) {

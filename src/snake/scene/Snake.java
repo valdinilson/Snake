@@ -1,24 +1,31 @@
 package snake.scene;
 
+import static snake.util.Constants.SNAKE_COLOR;
+import static snake.util.Constants.SNAKE_ELONGATE_PIECES;
+import static snake.util.Constants.SNAKE_START_X;
+import static snake.util.Constants.SNAKE_START_Y;
+import static snake.util.Constants.SNAKE_INITIAL_SIZE;
+import static snake.util.Constants.SNAKE_PIECE_SIZE;
+
 import snake.core.Direction;
 import snake.graphics.Rect;
 import snake.graphics.Shape;
-import snake.util.Constants;
 import snake.util.GameUtils;
 
 public class Snake extends Shape {
 
 	private Direction direction;
+	private int piecesToElongate;
 
 	public Snake() {
-		super(Constants.SNAKE_COLOR);
+		super(SNAKE_COLOR);
 
 		direction = Direction.NONE;
-		Rect rect = new Rect(Constants.SNAKE_INITIAL_X, Constants.SNAKE_INITIAL_Y, Constants.SNAKE_PIECE_SIZE,
-				Constants.SNAKE_PIECE_SIZE);
+		Rect rect = new Rect(SNAKE_START_X, SNAKE_START_Y, SNAKE_PIECE_SIZE,
+				SNAKE_PIECE_SIZE);
 		addRect(rect); // Cabeça da Snake
 
-		for (int i = 1; i < Constants.SNAKE_SIZE; i++) {
+		for (int i = 1; i < SNAKE_INITIAL_SIZE; i++) {
 			rect = duplicate(rect, Direction.LEFT);
 			addRect(rect);
 		}
@@ -28,6 +35,11 @@ public class Snake extends Shape {
 		if (direction != Direction.NONE) {
 			GameUtils.moveRect(getRects());
 			getRects().set(0, duplicate(getFirstRect(), direction));
+			
+			if (piecesToElongate > 0) {
+				getRects().add(getLastRect());
+				piecesToElongate--;
+			}
 		}
 	}
 
@@ -47,7 +59,7 @@ public class Snake extends Shape {
 		changeTo(Direction.RIGTH);
 	}
 
-	public boolean collideWithItself() {
+	public boolean collidedWithItself() {
 		for (int i = 1; i < getRects().size(); i++) {
 			if (getFirstRect().intersects(getRects().get(i))) {
 				return true;
@@ -56,8 +68,12 @@ public class Snake extends Shape {
 
 		return false;
 	}
+	
+	public void elongate() {
+		piecesToElongate = SNAKE_ELONGATE_PIECES;
+	}
 
-	private void changeTo(Direction direction) {
+	private synchronized void changeTo(Direction direction) {
 		if (direction.canChangeTo(direction)) {
 			this.direction = direction;
 		}
